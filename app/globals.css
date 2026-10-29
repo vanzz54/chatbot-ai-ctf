@@ -1,0 +1,362 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: theme("colors.ink.950");
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 255, 156, 0.07), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0, 229, 255, 0.05), transparent);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(0, 255, 156, 0.3);
+    color: #eafff6;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 156, 0.22) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 156, 0.18);
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 156, 0.4);
+  }
+
+  textarea,
+  input,
+  button {
+    font-family: inherit;
+  }
+
+  textarea::placeholder,
+  input::placeholder {
+    color: theme("colors.muted");
+  }
+}
+
+/* ============================================================
+   UTILITAS KUSTOM
+   ============================================================ */
+@layer components {
+  .text-glow {
+    text-shadow: 0 0 12px rgba(0, 255, 156, 0.55);
+  }
+
+  .text-glow-ice {
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+  }
+
+  .panel {
+    background: linear-gradient(180deg, rgba(13, 21, 20, 0.92), rgba(7, 11, 10, 0.92));
+    border: 1px solid rgba(0, 255, 156, 0.12);
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(rgba(0, 255, 156, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 156, 0.045) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.16) 3px
+    );
+    opacity: 0.35;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-transparent px-2.5 py-2 text-[11px] tracking-widest text-muted transition-colors hover:border-neon/25 hover:bg-neon/10 hover:text-neon focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neon/60 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+}
+
+/* ============================================================
+   MARKDOWN — "prose" versi cyber
+   ============================================================ */
+@layer components {
+  .md-cyber {
+    @apply text-[13.5px] leading-[1.7];
+    word-break: break-word;
+  }
+
+  .md-cyber > * + * {
+    @apply mt-3;
+  }
+
+  .md-cyber h1,
+  .md-cyber h2,
+  .md-cyber h3,
+  .md-cyber h4 {
+    @apply font-semibold tracking-wide text-white;
+  }
+
+  .md-cyber h1 {
+    @apply text-lg;
+  }
+
+  .md-cyber h2 {
+    @apply mt-6 border-b border-neon/15 pb-1.5 text-[15px] text-neon text-glow;
+  }
+
+  .md-cyber h3 {
+    @apply mt-4 text-[14px] text-neon-soft;
+  }
+
+  .md-cyber h4 {
+    @apply text-[13px] text-ice;
+  }
+
+  .md-cyber p {
+    @apply text-body/90;
+  }
+
+  .md-cyber a {
+    @apply text-ice underline decoration-ice/40 underline-offset-2 hover:decoration-ice;
+  }
+
+  .md-cyber strong {
+    @apply font-semibold text-white;
+  }
+
+  .md-cyber em {
+    @apply text-neon-soft;
+  }
+
+  .md-cyber ul,
+  .md-cyber ol {
+    @apply pl-1;
+  }
+
+  .md-cyber ul {
+    @apply list-none space-y-1.5;
+  }
+
+  .md-cyber ul > li {
+    @apply relative pl-5 text-body/90;
+  }
+
+  .md-cyber ul > li::before {
+    content: "▸";
+    @apply absolute left-0 top-0 text-neon;
+  }
+
+  .md-cyber ol {
+    @apply list-decimal space-y-1.5 marker:text-neon;
+  }
+
+  .md-cyber ol > li {
+    @apply pl-1 text-body/90;
+  }
+
+  .md-cyber ol > li::marker {
+    @apply text-neon;
+  }
+
+  .md-cyber li > ul,
+  .md-cyber li > ol {
+    @apply mt-1.5;
+  }
+
+  .md-cyber li code,
+  .md-cyber p code,
+  .md-cyber td code,
+  .md-cyber th code,
+  .md-cyber a code {
+    @apply rounded-sm border border-neon/20 bg-neon/10 px-1.5 py-0.5 text-[12px] text-neon;
+  }
+
+  .md-cyber blockquote {
+    @apply border-l-2 border-ice/50 bg-ice/5 px-3 py-2 text-ice/90;
+  }
+
+  .md-cyber hr {
+    @apply border-neon/15;
+  }
+
+  .md-cyber table {
+    @apply w-full border-collapse text-[12.5px];
+    display: block;
+    overflow-x: auto;
+  }
+
+  .md-cyber th {
+    @apply border border-neon/15 bg-ink-800 px-2.5 py-1.5 text-left font-semibold text-neon;
+  }
+
+  .md-cyber td {
+    @apply border border-neon/10 px-2.5 py-1.5 text-body/90;
+  }
+}
+
+/* ============================================================
+   CODE BLOCK
+   ============================================================ */
+.codeblock {
+  @apply my-3 overflow-hidden rounded-md border border-neon/20 bg-[#060a09] shadow-panel;
+}
+
+.codeblock__bar {
+  @apply flex items-center justify-between gap-3 border-b border-neon/15 bg-gradient-to-r from-neon/10 via-neon/5 to-transparent px-3 py-1.5;
+}
+
+.codeblock__lang {
+  @apply text-[10px] font-semibold tracking-[0.22em] text-neon;
+}
+
+.codeblock__meta {
+  @apply text-[10px] tracking-widest text-muted;
+}
+
+.codeblock__copy {
+  @apply inline-flex items-center gap-1.5 rounded-sm border border-neon/25 bg-neon/5 px-2 py-1 text-[10px] font-semibold tracking-[0.15em] text-neon transition-all hover:bg-neon/20 hover:shadow-neon focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neon/60;
+}
+
+.codeblock__body {
+  @apply max-h-[26rem] overflow-auto p-3.5;
+}
+
+.codeblock__body pre {
+  @apply text-[12.5px] leading-[1.65];
+}
+
+.codeblock__body code {
+  @apply whitespace-pre;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* inline code milik markdown (di luar code block) */
+.inline-code {
+  @apply rounded-sm border border-neon/20 bg-neon/10 px-1.5 py-0.5 text-[12px] text-neon;
+}
+
+/* ============================================================
+   highlight.js — tema neon terminal
+   ============================================================ */
+.hljs {
+  color: #cfe3dc;
+  background: transparent;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #4e6b63;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-type,
+.hljs-doctag {
+  color: #00ff9c;
+}
+
+.hljs-string,
+.hljs-meta .hljs-string,
+.hljs-regexp,
+.hljs-template-tag {
+  color: #00e5ff;
+}
+
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #ffcc66;
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-section,
+.hljs-name {
+  color: #7dffd0;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title,
+.hljs-title.class_,
+.hljs-type.parameter {
+  color: #bd93f9;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: #ff6ec7;
+}
+
+.hljs-meta,
+.hljs-decorator {
+  color: #ffb347;
+}
+
+.hljs-tag {
+  color: #6f8a83;
+}
+
+.hljs-subst {
+  color: #cfe3dc;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}
+
+.hljs-addition {
+  color: #00ff9c;
+  background: rgba(0, 255, 156, 0.08);
+}
+
+.hljs-deletion {
+  color: #ff4d6d;
+  background: rgba(255, 77, 109, 0.08);
+}
